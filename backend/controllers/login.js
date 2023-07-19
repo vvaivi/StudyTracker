@@ -20,6 +20,12 @@ router.post('/', async (request, response) => {
 		});
 	}
 
+	if (!(user && user.verified)) {
+		return response.status(401).json({
+			error: 'unverified account',
+		});
+	}
+
 	const userForToken = {
 		username: user.username,
 		id: user.id,

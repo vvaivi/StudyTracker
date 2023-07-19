@@ -78,14 +78,14 @@ describe('user creation', () => {
 describe('log in', () => {
 	beforeEach(async () => {
 		const passwordHash = await bcrypt.hash('secret', 10);
-		const user = new User({ username: 'user', passwordHash });
+		const user = new User({ username: process.env.TEST_EMAIL, passwordHash, verified: true });
 		await user.save();
 	});
 
 	test('log in succeeds with correct user information', async () => {
-		await api
+		const result = await api
 			.post('/api/login')
-			.send({ username: 'user', password: 'secret' })
+			.send({ username: process.env.TEST_EMAIL, password: 'secret' })
 			.expect(200)
 			.expect('Content-Type', /application\/json/);
 	});
@@ -103,5 +103,86 @@ describe('log in', () => {
 			.expect('Content-Type', /application\/json/);
 
 		expect(result.body.error).toContain('Username does not match to any user.');
+	});
+
+	test('log in fails with correct username and password if the account is not verified', async () => {
+		await User.deleteMany({});
+
+		const passwordHash = await bcrypt.hash('secret', 10);
+		const user = new User({ username: process.env.TEST_EMAIL, passwordHash });
+		await user.save();
+
+		await api
+			.post('/api/login')
+			.send({ username: process.env.TEST_EMAIL, password: 'secret' })
+			.expect(401)
+			.expect('Content-Type', /application\/json/);
+	});
+
+	test('log in succeeds with correct username and password if the account is verified', async () => {
+		await api
+			.post('/api/login')
+			.send({ username: process.env.TEST_EMAIL, password: 'secret' })
+			.expect(200)
+			.expect('Content-Type', /application\/json/);
+	});
+});
+
+describe('verification', () => {
+	beforeEach(async () => {
+		const user = new User({ username: process.env.TEST_EMAIL, name: 'Test Name', password: 'secret' });
+		await user.save();
+	});
+
+	test('by default, the account is unverified', async () => {
+		const response = await api
+			.get('/api/users')
+			.expect(200)
+			.expect('Content-Type', /application\/json/);
+
+		expect(response.body[0].verified).toBe(false);
+	});
+
+	test('only valid email addresses are accepted as usernames', async () => {
+		const newUser = {
+			username: 'notvalidemail',
+			name: 'User User',
+			password: 'notpublic',
+		};
+
+		const result = await api
+			.post('/api/users')
+			.send(newUser)
+			.expect(400)
+			.expect('Content-Type', /application\/json/);
+
+		expect(result.body.error).toContain('Invalid email address.');
+	});
+
+	test('when the verification link is visited, the account changes to verified', async () => {
+		const response = await api
+			.get('/api/users')
+			.expect(200)
+			.expect('Content-Type', /application\/json/);
+
+		const id = response.body[0].id;
+		expect(id).toBeDefined();
+
+		expect(response.body[0].verified).toBe(false);
+		const username = response.body[0].username;
+
+		await api
+			.get(`/api/users/verify/${id}`)
+			.expect(201)
+			.expect('Content-Type', /application\/json/);
+
+		const result = await api
+			.get('/api/users')
+			.expect(200)
+			.expect('Content-Type', /application\/json/);
+
+		const user = result.body.find((user) => user.username === username);
+
+		expect(user.verified).toBe(true);
 	});
 });

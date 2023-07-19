@@ -8,6 +8,10 @@ const schema = mongoose.Schema({
 	},
 	name: String,
 	passwordHash: String,
+	verified: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 schema.set('toJSON', {
