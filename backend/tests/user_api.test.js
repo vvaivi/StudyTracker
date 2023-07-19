@@ -74,3 +74,34 @@ describe('user creation', () => {
 		expect(result.body.error).toContain('Username must be unique, this username is already taken.');
 	});
 });
+
+describe('log in', () => {
+	beforeEach(async () => {
+		const passwordHash = await bcrypt.hash('secret', 10);
+		const user = new User({ username: 'user', passwordHash });
+		await user.save();
+	});
+
+	test('log in succeeds with correct user information', async () => {
+		await api
+			.post('/api/login')
+			.send({ username: 'user', password: 'secret' })
+			.expect(200)
+			.expect('Content-Type', /application\/json/);
+	});
+
+	test('log in fails with incorrect user information', async () => {
+		const newUser = {
+			username: 'newuser',
+			password: 'fakeuser',
+		};
+
+		const result = await api
+			.post('/api/login')
+			.send(newUser)
+			.expect(401)
+			.expect('Content-Type', /application\/json/);
+
+		expect(result.body.error).toContain('Username does not match to any user.');
+	});
+});
