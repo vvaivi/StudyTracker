@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const { errorHandler } = require('./utils/middleware');
 const logger = require('./utils/logger');
 
+const tasksRouter = require('./controllers/tasks');
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login');
 
@@ -24,6 +25,7 @@ app.use(cors());
 app.use(express.static('build'));
 app.use(express.json());
 
+app.use('/api/tasks', tasksRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
 
