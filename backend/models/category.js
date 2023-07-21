@@ -1,27 +1,27 @@
 const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
-	username: {
+	name: {
 		type: String,
 		required: true,
-		unique: true,
 	},
-	name: String,
-	passwordHash: String,
-	verified: {
+	dateCreated: {
+		type: Date,
+		default: Date.now,
+	},
+	target: Number,
+	selected: {
 		type: Boolean,
-		default: false,
+		default: true,
+	},
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
 	},
 	tasks: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Task',
-		},
-	],
-	categories: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Category',
 		},
 	],
 });
@@ -35,6 +35,4 @@ schema.set('toJSON', {
 	},
 });
 
-const User = mongoose.model('User', schema);
-
-module.exports = User;
+module.exports = mongoose.model('Category', schema);

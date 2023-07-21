@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Task = require('../models/task');
+const Category = require('../models/category');
 
 const initialUsers = [
 	{
@@ -29,6 +30,17 @@ const initialTasks = [
 	},
 ];
 
+const initialCategories = [
+	{
+		name: 'studying',
+		tasks: [new Task(initialTasks[0])],
+	},
+	{
+		name: 'cooking',
+		tasks: [new Task(initialTasks[1])],
+	},
+];
+
 const usersInDb = async () => {
 	const users = await User.find({});
 	return users.map((user) => user.toJSON());
@@ -39,9 +51,16 @@ const tasksInDb = async () => {
 	return tasks.map((task) => task.toJSON());
 };
 
+const categoriesInDb = async () => {
+	const categories = await Category.find({});
+	return categories.map((category) => category.toJSON());
+};
+
 module.exports = {
 	initialUsers,
 	usersInDb,
 	initialTasks,
 	tasksInDb,
+	initialCategories,
+	categoriesInDb,
 };

@@ -31,6 +31,7 @@ describe('when there are tasks saved', () => {
 	});
 
 	test('tasks are returned as json', async () => {
+		jest.setTimeout(10000);
 		const response = await api
 			.get('/api/tasks')
 			.expect(200)

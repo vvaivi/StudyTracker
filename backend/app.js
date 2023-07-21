@@ -9,6 +9,7 @@ const logger = require('./utils/logger');
 const tasksRouter = require('./controllers/tasks');
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login');
+const categoriesRouter = require('./controllers/categories');
 
 logger.info('connecting to', config.MONGODB_URI);
 
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use('/api/tasks', tasksRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/categories', categoriesRouter);
 
 if (process.env.NODE_ENV === 'test') {
 	const testingRouter = require('./controllers/testing');
