@@ -6,6 +6,7 @@ const app = require('../app');
 const helper = require('./test_helper');
 const api = supertest(app);
 const User = require('../models/user');
+const Task = require('../models/task');
 
 beforeEach(async () => {
 	await User.deleteMany({});
@@ -184,5 +185,63 @@ describe('verification', () => {
 		const user = result.body.find((user) => user.username === username);
 
 		expect(user.verified).toBe(true);
+	});
+});
+
+describe('user deletion', () => {
+	test('user can be deleted', async () => {
+		const user = new User({ username: process.env.TEST_EMAIL, name: 'Test Name', password: 'secret' });
+		await user.save();
+
+		const response = await api
+			.get('/api/users')
+			.expect(200)
+			.expect('Content-Type', /application\/json/);
+
+		const id = response.body[0].id;
+
+		await api.delete(`/api/users/${id}`).expect(204);
+
+		const result = await api
+			.get('/api/users')
+			.expect(200)
+			.expect('Content-Type', /application\/json/);
+
+		const deletedUser = result.body.filter((user) => user.id === id);
+
+		expect(deletedUser.length).toBe(0);
+	});
+});
+
+describe('guest users', () => {
+	beforeEach(async () => {
+		await User.deleteMany({});
+	});
+
+	test('a guest user can be created', async () => {
+		await api
+			.post('/api/users/guest')
+			.expect(201)
+			.expect('Content-Type', /application\/json/);
+
+		const response = await api
+			.get('/api/users')
+			.expect(200)
+			.expect('Content-Type', /application\/json/);
+
+		expect(response.body.length).toBe(1);
+	});
+
+	test('a guest user can log in', async () => {
+		const response = await api
+			.post('/api/users/guest')
+			.expect(201)
+			.expect('Content-Type', /application\/json/);
+
+		await api
+			.post('/api/login')
+			.send({ username: response.body.username, guest: response.body.guest })
+			.expect(200)
+			.expect('Content-Type', /application\/json/);
 	});
 });

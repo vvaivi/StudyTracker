@@ -12,6 +12,10 @@ const schema = mongoose.Schema({
 		type: Boolean,
 		default: false,
 	},
+	guest: {
+		type: Boolean,
+		default: false,
+	},
 	tasks: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

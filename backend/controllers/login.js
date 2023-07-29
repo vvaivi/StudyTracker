@@ -12,29 +12,32 @@ router.post('/', async (request, response) => {
 		return response.status(401).json({ error: 'Username does not match to any user.' });
 	}
 
-	const passwordCorrect = user === null ? false : await bcrypt.compare(password, user.passwordHash);
+	if (!user.guest) {
+		const passwordCorrect = user === null ? false : await bcrypt.compare(password, user.passwordHash);
 
-	if (!passwordCorrect) {
-		return response.status(401).json({
-			error: 'Invalid password.',
-		});
-	}
+		if (!passwordCorrect) {
+			return response.status(401).json({
+				error: 'Invalid password.',
+			});
+		}
 
-	if (!(user && user.verified)) {
-		return response.status(401).json({
-			error: 'unverified account',
-		});
+		if (!(user && user.verified)) {
+			return response.status(401).json({
+				error: 'Unverified account, please check your email for verification link.',
+			});
+		}
 	}
 
 	const userForToken = {
 		username: user.username,
 		id: user.id,
 		expiresIn: 60 * 60,
+		guest: user.guest,
 	};
 
 	const token = jwt.sign(userForToken, process.env.SECRET);
 
-	response.status(200).send({ token, username: user.username, id: user.id, name: user.name });
+	response.status(200).send({ token, username: user.username, id: user.id, name: user.name, guest: user.guest });
 });
 
 module.exports = router;

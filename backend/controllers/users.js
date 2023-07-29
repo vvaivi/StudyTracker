@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const router = require('express').Router();
 const User = require('../models/user');
+const Task = require('../models/task');
 const Joi = require('joi');
 const { sendEmail } = require('../utils/email');
 
@@ -69,10 +70,35 @@ router.get('/verify/:id', async (request, response) => {
 	response.status(201).json('Account verified');
 });
 
-router.get('/:id', async (request, response) => {
+router.post('/guest', async (request, response) => {
+	const id = Math.floor(Math.random() * 100000);
+
+	const user = new User({
+		username: id,
+		name: `Guest ${id}`,
+		guest: true,
+	});
+	const savedUser = await user.save();
+
+	response.status(201).json(savedUser);
+});
+
+router.delete('/:id', async (request, response) => {
 	const user = await User.findById(request.params.id);
 
-	response.json(user);
+	if (user) {
+		const tasks = await Task.find({ user: user.id });
+		if (tasks) {
+			tasks.forEach(async (t) => {
+				await t.remove();
+			});
+		}
+
+		await user.remove();
+		return response.status(204).end();
+	}
+
+	return response.status(404).json({ error: 'User not found.' });
 });
 
 module.exports = router;
