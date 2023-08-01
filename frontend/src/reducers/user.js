@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { notify } from './notification';
+import { clearTasks } from './tasks';
+import { clearCategories } from './categories';
 
 import storageService from '../services/storage';
 import loginService from '../services/login';
@@ -43,7 +45,10 @@ export const initUser = () => {
 export const clearUser = () => {
 	return async (dispatch) => {
 		storageService.removeUser();
+
 		dispatch(clear());
+		dispatch(clearTasks());
+		dispatch(clearCategories());
 	};
 };
 
