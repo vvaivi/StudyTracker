@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
 	overflow-x: hidden;
   	overflow-y: auto;
     font-family: 'Verdana', sans-serif;
-    background: #B2BEB5;
+    background: #787276;
   }
 `;
 
@@ -26,31 +26,68 @@ export const ApplicationTitle = styled.div`
 	padding-top: 5%;
 `;
 
+export const CategoryDropdown = styled.div`
+	position: absolute;
+	background-color: #564c4d;
+	z-index: 1;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	padding: 4px;
+	max-height: 150px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	width: 14.5%;
+	margin-left: 2%;
+	border-radius: 5px;
+	font-size: small;
+
+	div:not(:last-child) {
+		margin-bottom: 4px;
+		border-bottom: 1px solid #ccc;
+		height: 20px;
+		padding: 4px;
+	}
+	div:last-child {
+		height: 20px;
+		padding: 4px;
+	}
+	div:hover {
+		background-color: #424242;
+	}
+`;
+
 export const FooterContainer = styled.div`
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	height: 10%;
-	background-color: DarkOliveGreen;
+	height: 50px;
+	background-color: #36454f;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 	font-size: 12px;
-	color: #36454f;
+	color: #c0c0c0;
 `;
 
 export const FooterButton = styled.div`
-    padding: 10px;
+    padding: 8px;
     margin: 10px;
-    background-color: #36454f;
+    background-color: #424242;
     color: #C0C0C0;
     border-radius: 10px;
-    border 1px solid darkslategrey;
+    border 1px solid #564c4d;
     cursor: pointer;
     &:hover {
         background-color: darkgrey;
         color: #36454f;
     }
+`;
+
+export const InputContainer = styled.div`
+	width: 100%;
+	height: 50%;
+	position: absolute;
+	display: flex;
+	bottom: 20%;
 `;
 
 export const LoginPageContainer = styled.div`
@@ -134,6 +171,31 @@ export const LoginPageInputContainer = styled.div`
 	transform: translate(-50%, -50%);
 `;
 
+export const NotesContainer = styled.div`
+	width: 40%;
+	color: #c0c0c0;
+	background: #41424c;
+	right: 0;
+	margin-right: 5%;
+	margin-left: 5%;
+	text-align: center;
+	display: block;
+	border-radius: 15px;
+`;
+
+export const NoteList = styled.div`
+	width: 90%;
+	font-size: small;
+	position: relative;
+	max-height: 55%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding: 5px;
+	margin-top: 15px;
+	margin-left: auto;
+	margin-right: auto;
+`;
+
 export const NotificationContainer = styled.div`
 	border: 3px solid ${(props) => (props.alert ? '#B67F7F' : 'darkolivegreen')};
 	color: #b2beb5;
@@ -149,4 +211,92 @@ export const NotificationContainer = styled.div`
 	display: flex;
 	text-align: center;
 	align-items: center;
+`;
+
+export const PageHeader = styled.div`
+	color: DarkSlateGray;
+	font-family: Forte;
+	text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+	font-weight: bold;
+	text-align: center;
+	font-size: 30px;
+	padding-top: 7%;
+`;
+
+export const SaveNoteButton = styled(LoginPageButton)`
+	position: absolute;
+	right: 40%;
+	bottom: 10%;
+`;
+
+export const SaveTaskButton = styled(LoginPageButton)`
+	position: absolute;
+	left: 40%;
+	bottom: 10%;
+`;
+
+export const TaskInput = styled.input`
+	width: 80%;
+	background: #41424c;
+	border: 2px solid #564c4d;
+	color: white;
+	text-align: center;
+	border-radius: 7px;
+	heigth: 25px;
+	padding: 5px;
+`;
+
+export const TaskInputContainer = styled.table`
+	padding-left: 5%;
+	padding-right: 5%;
+	width: 50%;
+	height: 100%;
+	left: 0;
+	color: #c0c0c0;
+	tr {
+		background: #564c4d;
+	}
+	td {
+		height: 35px;
+		width: 50%;
+		border-radius: 10px;
+		padding: 5px;
+		text-align: center;
+	}
+	tr:nth-child(odd) {
+		background-color: #424242;
+	}
+	tr:nth-child(even) {
+		${TaskInput} {
+			border-color: #424242 !important;
+		}
+	}
+`;
+
+export const TitleInput = styled.input`
+	height: 25px;
+	width: 275px;
+	border 2px solid #564c4d;
+	border-radius: 10px;
+	position: absolute;
+	left: 50%;
+	right: 50%;
+	bottom: 70%;
+	transform: translate(-50%, -50%);
+	fon-weight: bold;
+	color: #c0c0c0;
+	text-align: center;
+	background: #41424C;
+	&::placeholder {
+		color: #c0c0c0;
+	}
+`;
+
+export const NoteInput = styled(TaskInput)`
+	width: 80%;
+	height: 10%;
+	margin: 10%;
+	align-self: center;
+	margin-top: 20px !important;
+	margin: 0;
 `;
