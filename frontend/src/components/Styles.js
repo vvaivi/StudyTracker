@@ -171,6 +171,35 @@ export const LoginPageInputContainer = styled.div`
 	transform: translate(-50%, -50%);
 `;
 
+export const NavigationBar = styled.div`
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 50px;
+	background-color: #36454f;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+
+export const NavigationButton = styled.button`
+	text-decoration: none;
+	color: #c0c0c0;
+	background: none;
+	height: 20px;
+	border: none;
+	font-size: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-left: 1px solid #c0c0c0 !important;
+	&:hover {
+		color: white;
+	}
+	&:first-child {
+		border-left: none !important;
+	}
+`;
+
 export const NotesContainer = styled.div`
 	width: 40%;
 	color: #c0c0c0;

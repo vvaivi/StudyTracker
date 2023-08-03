@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Notification from './components/Notification';
 import TaskForm from './components/TaskForm';
 import TaskListPage from './components/TaskListPage';
+import Navigation from './components/Navigation';
 
 const App = () => {
 	const stateInitializer = useInitialization();
@@ -34,6 +35,7 @@ const App = () => {
 	return (
 		<div>
 			<GlobalStyle />
+			<Navigation />
 			<Notification />
 			<Routes>
 				<Route path="/" element={<TaskListPage displayActive={true} />} />
