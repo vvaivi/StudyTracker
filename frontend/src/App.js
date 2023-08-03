@@ -9,6 +9,7 @@ import LoginPage from './components/LoginPage';
 import Footer from './components/Footer';
 import Notification from './components/Notification';
 import TaskForm from './components/TaskForm';
+import TaskListPage from './components/TaskListPage';
 
 const App = () => {
 	const stateInitializer = useInitialization();
@@ -35,6 +36,8 @@ const App = () => {
 			<GlobalStyle />
 			<Notification />
 			<Routes>
+				<Route path="/" element={<TaskListPage displayActive={true} />} />
+				<Route path="/expired" element={<TaskListPage displayActive={false} />} />
 				<Route path="/create" element={<TaskForm />} />
 			</Routes>
 			<Footer />

@@ -292,6 +292,42 @@ export const TitleInput = styled.input`
 	}
 `;
 
+export const TaskList = styled.table`
+	width: 80%;
+	margin: 20px auto;
+	border-collapse: collapse;
+	font-size: small;
+	color: #c0c0c0;
+	border: 2px solid ##564c4d;
+	margin-bottom: 10%;
+
+	th {
+		padding: 10px;
+		color: #787276;
+		border: 2px solid #564c4d;
+		background-color: #424242;
+	}
+
+	tr {
+		border: 2px solid #564c4d;
+		background-color: #564c4d;
+
+		&:nth-child(even) {
+			background-color: #424242;
+		}
+
+		&:hover {
+			background-color: #787276;
+		}
+	}
+
+	td {
+		border: 2px solid #564c4d;
+		padding: 10px;
+		text-align: center;
+	}
+`;
+
 export const NoteInput = styled(TaskInput)`
 	width: 80%;
 	height: 10%;
