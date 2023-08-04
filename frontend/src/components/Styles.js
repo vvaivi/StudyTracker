@@ -254,13 +254,19 @@ export const PageHeader = styled.div`
 
 export const SaveNoteButton = styled(LoginPageButton)`
 	position: absolute;
-	right: 40%;
+	right: 35%;
 	bottom: 10%;
 `;
 
 export const SaveTaskButton = styled(LoginPageButton)`
 	position: absolute;
-	left: 40%;
+	left: 35%;
+	bottom: 10%;
+`;
+
+export const DeleteTaskButton = styled(LoginPageButton)`
+	position: absolute;
+	right: 5%;
 	bottom: 10%;
 `;
 

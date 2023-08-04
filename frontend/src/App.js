@@ -40,7 +40,8 @@ const App = () => {
 			<Routes>
 				<Route path="/" element={<TaskListPage displayActive={true} />} />
 				<Route path="/expired" element={<TaskListPage displayActive={false} />} />
-				<Route path="/create" element={<TaskForm />} />
+				<Route path="/create" element={<TaskForm createNew={true} />} />
+				<Route path="/:id" element={<TaskForm createNew={false} />} />
 			</Routes>
 			<Footer />
 		</div>

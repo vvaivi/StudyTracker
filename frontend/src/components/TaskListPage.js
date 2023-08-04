@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import dateFormat from 'dateformat';
 
@@ -7,6 +8,7 @@ import { TaskList, PageHeader } from './Styles';
 
 const TaskListPage = (props) => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(initializeTasks());
@@ -50,7 +52,7 @@ const TaskListPage = (props) => {
 				</thead>
 				<tbody>
 					{displayedTasks.map((task) => (
-						<tr key={task.id}>
+						<tr key={task.id} onClick={() => navigate(`/${task.id}`)}>
 							<td style={{ width: '50%' }}>{task.title}</td>
 							<td style={{ width: '35%' }}>
 								{dateFormat(new Date(task.deadline).toLocaleString('en-US', process.env.DATE_OPTIONS), 'dd/mm/yyyy HH:MM')}
