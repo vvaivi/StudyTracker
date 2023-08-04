@@ -55,6 +55,54 @@ export const CategoryDropdown = styled.div`
 	}
 `;
 
+export const CategoryList = styled.div`
+	background: #564c4d;
+	border: 3px solid #41424c;
+	border-radius: 10px;
+	color: #c0c0c0;
+	width: 90%;
+	max-height: 50%;
+	overflow: auto;
+	display: grid;
+	align-self: center;
+	grid-template-columns: repeat(auto-fill, minmax(29%, 1fr));
+	gap: 5px 50px;
+	padding: 10px;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+`;
+
+export const CategoryListItem = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-basis: calc(5%);
+	margin-bottom: 1px;
+`;
+
+export const CategoryTasks = styled.div`
+	border-radius: 10px;
+	position: absolute;
+	width: 70%;
+	height: 70%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #36454f;
+	border: 3px solid #41424c;
+	color: #c0c0c0;
+	z-index: 1;
+	text-align: center;
+`;
+
+export const CloseMark = styled.div`
+	position: absolute;
+	right: 15px;
+	top: 10px;
+	cursor: pointer;
+`;
+
 export const FooterContainer = styled.div`
 	position: absolute;
 	bottom: 0;
@@ -270,6 +318,12 @@ export const DeleteTaskButton = styled(LoginPageButton)`
 	bottom: 10%;
 `;
 
+export const TargetButton = styled(LoginPageButton)`
+	&:disabled {
+		background-color: #41424c;
+	}
+`;
+
 export const TaskInput = styled.input`
 	width: 80%;
 	background: #41424c;
@@ -279,6 +333,17 @@ export const TaskInput = styled.input`
 	border-radius: 7px;
 	heigth: 25px;
 	padding: 5px;
+`;
+
+export const TargetInput = styled(TaskInput)`
+	width: 75px;
+	height: 25px;
+`;
+
+export const TargetContainer = styled.div`
+	position: absolute;
+	right: 15px;
+	bottom: 15px;
 `;
 
 export const TaskInputContainer = styled.table`

@@ -11,6 +11,7 @@ import Notification from './components/Notification';
 import TaskForm from './components/TaskForm';
 import TaskListPage from './components/TaskListPage';
 import Navigation from './components/Navigation';
+import StatisticsPage from './components/StatisticsPage';
 
 const App = () => {
 	const stateInitializer = useInitialization();
@@ -42,6 +43,7 @@ const App = () => {
 				<Route path="/expired" element={<TaskListPage displayActive={false} />} />
 				<Route path="/create" element={<TaskForm createNew={true} />} />
 				<Route path="/:id" element={<TaskForm createNew={false} />} />
+				<Route path="/statistics" element={<StatisticsPage />} />
 			</Routes>
 			<Footer />
 		</div>

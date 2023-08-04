@@ -70,7 +70,7 @@ const TaskForm = (props) => {
 			note.setValue('');
 			notes.setValue(task.notes);
 		}
-	}, [task]);
+	}, []);
 
 	const categories = useSelector((state) => state.categories);
 	const categoryDropdownRef = useRef();
