@@ -21,6 +21,8 @@ import { addTask, updateTask, removeTask } from '../reducers/tasks';
 import { useField, useNotification } from '../hooks/index';
 import { addCategory, initializeCategories } from '../reducers/categories';
 
+import ProgressChart from './ProgressChart';
+
 const TaskForm = (props) => {
 	const dispatch = useDispatch();
 	const notifyWith = useNotification();
@@ -202,6 +204,7 @@ const TaskForm = (props) => {
 			<PageHeader>{props.createNew ? 'Add a new task' : task.title}</PageHeader>
 
 			{props.createNew && <TitleInput placeholder="Task title" {...title} />}
+			{!props.createNew && <ProgressChart task={task} />}
 
 			<InputContainer>
 				<TaskInputContainer>

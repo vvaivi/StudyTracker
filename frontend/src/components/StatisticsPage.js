@@ -6,6 +6,7 @@ import { PageHeader, CategoryList, CategoryListItem } from './Styles';
 import { useField } from '../hooks';
 
 import Category from './Category';
+import PieChart from './PieChart';
 
 const StatisticsPage = () => {
 	const dispatch = useDispatch();
@@ -52,6 +53,8 @@ const StatisticsPage = () => {
 			{selectedCategory.value && (
 				<Category category={selectedCategory.value} close={() => selectedCategory.setValue(null)} />
 			)}
+
+			<PieChart categories={selectedCategories} />
 		</div>
 	);
 };

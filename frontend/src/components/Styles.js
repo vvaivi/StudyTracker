@@ -104,7 +104,7 @@ export const CloseMark = styled.div`
 `;
 
 export const FooterContainer = styled.div`
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	width: 100%;
 	height: 50px;
@@ -220,7 +220,7 @@ export const LoginPageInputContainer = styled.div`
 `;
 
 export const NavigationBar = styled.div`
-	position: absolute;
+	position: fixed;
 	top: 0;
 	width: 100%;
 	height: 50px;
@@ -324,6 +324,12 @@ export const TargetButton = styled(LoginPageButton)`
 	}
 `;
 
+export const TaskChart = styled.div`
+	padding-top: 5px;
+	display: flex;
+	justify-content: center;
+`;
+
 export const TaskInput = styled.input`
 	width: 80%;
 	background: #41424c;
@@ -425,6 +431,37 @@ export const TaskList = styled.table`
 		border: 2px solid #564c4d;
 		padding: 10px;
 		text-align: center;
+	}
+`;
+
+export const StatisticsChart = styled.div`
+	position: absolute;
+	right: 0;
+	width: 45%;
+	margin-top: auto;
+	margin-bottom: auto;
+`;
+
+export const StatisticsContainer = styled.div`
+	position: absolute;
+	left: 0;
+	background-color: #36454f;
+	font-size: 14px;
+	margin-top: 165px;
+	margin-left: 10%;
+	padding: 20px;
+	border-radius: 10px;
+	border: 3px solid #564c4d;
+`;
+
+export const StatisticsText = styled.div`
+	color: #c0c0c0;
+	display: flex;
+	align-items: center;
+	p {
+		padding: 10px;
+		font-weight: bold;
+		margin: 0;
 	}
 `;
 
