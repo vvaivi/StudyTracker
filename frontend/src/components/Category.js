@@ -61,7 +61,7 @@ const Category = (props) => {
 				{tasksInCategory.map((task) => (
 					<div key={task.id}>
 						<div>
-							{task.title} {totalTimeUsed !== 0 ? `${((task.usedTime / totalTimeUsed) * 100).toFixed(2)}%` : '0%'}
+							{task.title} {totalTimeUsed != 0 ? `${((task.usedTime / totalTimeUsed) * 100).toFixed(2)}%` : '0%'}
 						</div>
 					</div>
 				))}

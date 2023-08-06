@@ -114,6 +114,7 @@ const TaskForm = (props) => {
 			const updatedNotes = notes.value ? [...notes.value, note.value.trim()] : [note.value.trim()];
 			notes.setValue(updatedNotes);
 			note.setValue('');
+			onSaveTask();
 		}
 	};
 
@@ -131,13 +132,13 @@ const TaskForm = (props) => {
 		} else if (Number(completed.value) < 0 || Number(quantity.value) < 0 || Number(usedTime.value) < 0) {
 			notifyWith('Please do not input negative values.', 'alert');
 		} else if (deadline.value <= new Date().getTime()) {
-			notifyWith('The deadline should not be in the history.', 'alert');
+			notifyWith('The deadline should not be in the history, task not saved.', 'alert');
 		} else if (!(0 <= Number(priority.value) <= 10)) {
 			notifyWith('Please input priority value between 0 and 10.', 'alert');
-		} else if (quantity.value === 0) {
-			notifyWith('Number of sections should not be zero.', 'alert');
+		} else if (quantity.value == 0) {
+			notifyWith('Number of sections should not be zero, task not saved.', 'alert');
 		} else if (props.createNew && title.value.trim() === '') {
-			notifyWith('The title should not be empty.', 'alert');
+			notifyWith('The title should not be empty, task not saved.', 'alert');
 		} else {
 			const existingCategory = categories.find(
 				(category) => category.name.toLowerCase() === categoryName.value.toLowerCase()

@@ -13,6 +13,7 @@ const Piechart = (props) => {
 	tasks.filter((task) => props.categories.some((category) => category.tasks.includes(task.id)));
 
 	const totalTimeUsed = tasks.reduce((sum, task) => sum + task.usedTime, 0);
+	if (totalTimeUsed === 0) return (<div></div>);
 	const completedTasks = tasks.filter((task) => task.completed).length;
 
 	const curerntDate = new Date().getTime();

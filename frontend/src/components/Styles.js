@@ -4,10 +4,10 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
   body, html {
     margin: 0;
-	overflow-x: hidden;
-  	overflow-y: auto;
-    font-family: 'Verdana', sans-serif;
-    background: #787276;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: 'Arial', sans-serif;
+    background: #F0F0F0;
   }
 `;
 
@@ -18,7 +18,7 @@ export const ApplicationDescription = styled.div`
 
 export const ApplicationTitle = styled.div`
 	color: DarkSlateGray;
-	font-family: Forte;
+	font-family: 'Arial Black', sans-serif;
 	text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 	font-weight: bold;
 	text-align: center;
@@ -292,7 +292,7 @@ export const NotificationContainer = styled.div`
 
 export const PageHeader = styled.div`
 	color: DarkSlateGray;
-	font-family: Forte;
+	font-family: 'Arial Black', sans-serif;
 	text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 	font-weight: bold;
 	text-align: center;
